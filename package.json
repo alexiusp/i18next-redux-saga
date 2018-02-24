@@ -1,0 +1,24 @@
+{
+  "name": "i18next-redux-saga",
+  "version": "1.0.0",
+  "description": "i18next binding to redux using saga",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexiusp/i18next-redux-saga.git"
+  },
+  "keywords": [
+    "i18next",
+    "redux",
+    "saga"
+  ],
+  "author": "Aleksei Podgaev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexiusp/i18next-redux-saga/issues"
+  },
+  "homepage": "https://github.com/alexiusp/i18next-redux-saga#readme"
+}
