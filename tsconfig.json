@@ -4,6 +4,7 @@
     "target": "es2015",
     "lib": [
       "es2016",
+      "es2015.iterable",
       "dom"
     ],
     "noImplicitAny": true,
@@ -12,7 +13,8 @@
     "declaration": true,
     "declarationDir": "lib/types",
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "src/types"
     ]
   },
   "include": [

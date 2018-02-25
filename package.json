@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack -p",
     "build:dev": "webpack",
+    "start": "webpack --watch",
     "lint": "tslint -e **/node_modules/** -e **/lib/** -t codeFrame **/*.ts ",
     "test": "jest",
     "test:watch": "jest --watch",
