@@ -5,6 +5,9 @@ declare module 'i18next' {
     init: (config: any, callback: Callback) => I18Next;
     t: (key: string) => string;
     changeLanguage: (language: string, callback: Callback) => I18Next;
+    language: string;
+    languages: string[];
+    loadNamespaces: (ns: string | string[], callback: Callback) => I18Next;
   }
   const I18Next: I18Next;
   export = I18Next;

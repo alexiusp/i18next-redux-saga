@@ -8,6 +8,10 @@ import {
   ChangeLanguageAction,
   i18nextChangeLanguageReady,
   i18nextError,
+  I18NEXT_CHANGE_LANGUAGE,
+  LoadNamespacesAction,
+  i18nextLoadNamespacesReady,
+  I18NEXT_LOAD_NAMESPACES,
 } from './actions';
 import * as I18Next from 'i18next';
 
@@ -35,9 +39,21 @@ function* i18nextChangeLanguageSaga(action: ChangeLanguageAction) {
   }
 }
 
+function* i18nextLoadNamespacesSaga(action: LoadNamespacesAction) {
+  try {
+    yield cps([I18Next, 'loadNamespaces'], action.payload);
+    yield put(i18nextLoadNamespacesReady());      
+  } catch (error) {
+    console.error(error);
+    yield put(i18nextError(error));
+  }
+}
+
 export default function* i18nextSaga() {
   return yield all([
     yield takeEvery(I18NEXT_INIT, i18nextInitSaga),
     yield takeEvery(I18NEXT_USE, i18nextUseSaga),
+    yield takeEvery(I18NEXT_CHANGE_LANGUAGE, i18nextChangeLanguageSaga),
+    yield takeEvery(I18NEXT_LOAD_NAMESPACES, i18nextLoadNamespacesSaga),
   ]);
 }
