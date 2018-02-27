@@ -5,6 +5,9 @@ import {
   i18nextReady,
   I18NEXT_USE,
   UseAction,
+  ChangeLanguageAction,
+  i18nextChangeLanguageReady,
+  i18nextError,
 } from './actions';
 import * as I18Next from 'i18next';
 
@@ -18,6 +21,17 @@ function* i18nextInitSaga(action: InitAction) {
     yield put(i18nextReady());      
   } catch (error) {
     console.error(error);
+    yield put(i18nextError(error));
+  }
+}
+
+function* i18nextChangeLanguageSaga(action: ChangeLanguageAction) {
+  try {
+    yield cps([I18Next, 'changeLanguage'], action.payload);
+    yield put(i18nextChangeLanguageReady());      
+  } catch (error) {
+    console.error(error);
+    yield put(i18nextError(error));
   }
 }
 
