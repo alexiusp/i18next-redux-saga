@@ -1,19 +1,21 @@
-import { cps, call, put, takeEvery, all } from 'redux-saga/effects';
+import * as I18Next from 'i18next';
+import { all, call, cps, put, takeEvery } from 'redux-saga/effects';
 import {
+  I18NEXT_CHANGE_LANGUAGE,
   I18NEXT_INIT,
-  InitAction,
-  i18nextReady,
+  I18NEXT_LOAD_NAMESPACES,
   I18NEXT_USE,
-  UseAction,
+} from './actions';
+import {
   ChangeLanguageAction,
   i18nextChangeLanguageReady,
   i18nextError,
-  I18NEXT_CHANGE_LANGUAGE,
-  LoadNamespacesAction,
   i18nextLoadNamespacesReady,
-  I18NEXT_LOAD_NAMESPACES,
+  i18nextReady,
+  InitAction,
+  LoadNamespacesAction,
+  UseAction,
 } from './actions';
-import * as I18Next from 'i18next';
 
 function* i18nextUseSaga(action: UseAction) {
   yield call([I18Next, 'use'], action.payload);
@@ -22,7 +24,7 @@ function* i18nextUseSaga(action: UseAction) {
 function* i18nextInitSaga(action: InitAction) {
   try {
     yield cps([I18Next, 'init'], action.payload);
-    yield put(i18nextReady());      
+    yield put(i18nextReady());
   } catch (error) {
     console.error(error);
     yield put(i18nextError(error));
@@ -32,7 +34,7 @@ function* i18nextInitSaga(action: InitAction) {
 function* i18nextChangeLanguageSaga(action: ChangeLanguageAction) {
   try {
     yield cps([I18Next, 'changeLanguage'], action.payload);
-    yield put(i18nextChangeLanguageReady());      
+    yield put(i18nextChangeLanguageReady());
   } catch (error) {
     console.error(error);
     yield put(i18nextError(error));
@@ -42,7 +44,7 @@ function* i18nextChangeLanguageSaga(action: ChangeLanguageAction) {
 function* i18nextLoadNamespacesSaga(action: LoadNamespacesAction) {
   try {
     yield cps([I18Next, 'loadNamespaces'], action.payload);
-    yield put(i18nextLoadNamespacesReady());      
+    yield put(i18nextLoadNamespacesReady());
   } catch (error) {
     console.error(error);
     yield put(i18nextError(error));
