@@ -9,6 +9,8 @@ export const I18NEXT_CHANGE_LANGUAGE = '@@i18n/I18NEXT_CHANGE_LANGUAGE';
 export const I18NEXT_CHANGE_LANGUAGE_READY = '@@i18n/I18NEXT_CHANGE_LANGUAGE_READY';
 export const I18NEXT_LOAD_NAMESPACES = '@@i18n/I18NEXT_LOAD_NAMESPACES';
 export const I18NEXT_LOAD_NAMESPACES_READY = '@@i18n/I18NEXT_LOAD_NAMESPACES_READY';
+export const I18NEXT_LOAD_LANGUAGES = '@@i18n/I18NEXT_LOAD_LANGUAGES';
+export const I18NEXT_LOAD_LANGUAGES_READY = '@@i18n/I18NEXT_LOAD_LANGUAGES_READY';
 
 // interfaces
 export interface SimpleAction extends Action {
@@ -20,21 +22,21 @@ export interface BaseAction<T> extends SimpleAction {
 }
 
 export interface UseAction extends BaseAction<any> {
-  payload: any;
 }
 
 export interface InitAction extends BaseAction<any> {
-  payload: any;
 }
 
 export interface ErrorAction extends BaseAction<any> {
-  payload: any;
 }
 
 export interface ChangeLanguageAction extends BaseAction<string> {
 }
 
 export interface LoadNamespacesAction extends BaseAction<string | string[]> {
+}
+
+export interface LoadLanguagesAction extends BaseAction<string | string[]> {
 }
 
 // action builders
@@ -88,5 +90,18 @@ export const i18nextLoadNamespaces: ActionCreator<LoadNamespacesAction> = (ns: s
 export const i18nextLoadNamespacesReady: ActionCreator<SimpleAction> = () => {
   return {
     type: I18NEXT_LOAD_NAMESPACES_READY,
+  };
+};
+
+export const i18nextLoadLanguages: ActionCreator<LoadLanguagesAction> = (lang: string | string[]) => {
+  return {
+    type: I18NEXT_LOAD_LANGUAGES,
+    payload: lang,
+  };
+};
+
+export const i18nextLoadLanguagesReady: ActionCreator<SimpleAction> = () => {
+  return {
+    type: I18NEXT_LOAD_LANGUAGES_READY,
   };
 };
