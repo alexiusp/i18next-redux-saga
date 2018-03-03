@@ -11,6 +11,8 @@ export const I18NEXT_LOAD_NAMESPACES = '@@i18n/I18NEXT_LOAD_NAMESPACES';
 export const I18NEXT_LOAD_NAMESPACES_READY = '@@i18n/I18NEXT_LOAD_NAMESPACES_READY';
 export const I18NEXT_LOAD_LANGUAGES = '@@i18n/I18NEXT_LOAD_LANGUAGES';
 export const I18NEXT_LOAD_LANGUAGES_READY = '@@i18n/I18NEXT_LOAD_LANGUAGES_READY';
+export const I18NEXT_CREATE_INSTANCE = '@@i18n/I18NEXT_CREATE_INSTANCE';
+export const I18NEXT_CREATE_INSTANCE_READY = '@@i18n/I18NEXT_CREATE_INSTANCE_READY';
 
 // interfaces
 export interface SimpleAction extends Action {
@@ -103,5 +105,19 @@ export const i18nextLoadLanguages: ActionCreator<LoadLanguagesAction> = (lang: s
 export const i18nextLoadLanguagesReady: ActionCreator<SimpleAction> = () => {
   return {
     type: I18NEXT_LOAD_LANGUAGES_READY,
+  };
+};
+
+export const i18nextCreateInstance: ActionCreator<InitAction> = (options: any) => {
+  return {
+    type: I18NEXT_CREATE_INSTANCE,
+    payload: options,
+  };
+};
+
+export const i18nextCreateInstanceReady: ActionCreator<InitAction> = (instance: any) => {
+  return {
+    type: I18NEXT_CREATE_INSTANCE_READY,
+    payload: instance,
   };
 };

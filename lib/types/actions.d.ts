@@ -9,6 +9,8 @@ export declare const I18NEXT_LOAD_NAMESPACES = "@@i18n/I18NEXT_LOAD_NAMESPACES";
 export declare const I18NEXT_LOAD_NAMESPACES_READY = "@@i18n/I18NEXT_LOAD_NAMESPACES_READY";
 export declare const I18NEXT_LOAD_LANGUAGES = "@@i18n/I18NEXT_LOAD_LANGUAGES";
 export declare const I18NEXT_LOAD_LANGUAGES_READY = "@@i18n/I18NEXT_LOAD_LANGUAGES_READY";
+export declare const I18NEXT_CREATE_INSTANCE = "@@i18n/I18NEXT_CREATE_INSTANCE";
+export declare const I18NEXT_CREATE_INSTANCE_READY = "@@i18n/I18NEXT_CREATE_INSTANCE_READY";
 export interface SimpleAction extends Action {
     type: string;
 }
@@ -37,3 +39,5 @@ export declare const i18nextLoadNamespaces: ActionCreator<LoadNamespacesAction>;
 export declare const i18nextLoadNamespacesReady: ActionCreator<SimpleAction>;
 export declare const i18nextLoadLanguages: ActionCreator<LoadLanguagesAction>;
 export declare const i18nextLoadLanguagesReady: ActionCreator<SimpleAction>;
+export declare const i18nextCreateInstance: ActionCreator<InitAction>;
+export declare const i18nextCreateInstanceReady: ActionCreator<InitAction>;

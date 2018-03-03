@@ -2,6 +2,7 @@ import * as I18Next from 'i18next';
 import { all, call, cps, put, takeEvery } from 'redux-saga/effects';
 import {
   I18NEXT_CHANGE_LANGUAGE,
+  I18NEXT_CREATE_INSTANCE,
   I18NEXT_INIT,
   I18NEXT_LOAD_LANGUAGES,
   I18NEXT_LOAD_NAMESPACES,
@@ -16,6 +17,7 @@ import {
 } from './actions';
 import {
   i18nextChangeLanguageReady,
+  i18nextCreateInstanceReady,
   i18nextError,
   i18nextLoadLanguagesReady,
   i18nextLoadNamespacesReady,
@@ -66,6 +68,16 @@ function* i18nextLoadLanguagesSaga(action: LoadLanguagesAction) {
   }
 }
 
+function* i18nextCreateInstance(action: InitAction) {
+  try {
+    const newInstance = yield cps([I18Next, 'createInstance'], action.payload);
+    yield put(i18nextCreateInstanceReady(newInstance));
+  } catch (error) {
+    console.error(error);
+    yield put(i18nextError(error));
+  }
+}
+
 export default function* i18nextSaga() {
   return yield all([
     yield takeEvery(I18NEXT_INIT, i18nextInitSaga),
@@ -73,5 +85,6 @@ export default function* i18nextSaga() {
     yield takeEvery(I18NEXT_CHANGE_LANGUAGE, i18nextChangeLanguageSaga),
     yield takeEvery(I18NEXT_LOAD_NAMESPACES, i18nextLoadNamespacesSaga),
     yield takeEvery(I18NEXT_LOAD_LANGUAGES, i18nextLoadLanguagesSaga),
+    yield takeEvery(I18NEXT_CREATE_INSTANCE, i18nextCreateInstance),
   ]);
 }

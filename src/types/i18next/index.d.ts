@@ -9,6 +9,7 @@ declare module 'i18next' {
     languages: string[];
     loadNamespaces: (ns: string | string[], callback: Callback) => I18Next;
     loadLanguages: (ns: string | string[], callback: Callback) => I18Next;
+    createInstance: (config: any, callback: Callback) => I18Next;
   }
   const I18Next: I18Next;
   export = I18Next;
