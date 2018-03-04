@@ -31,7 +31,7 @@ function* i18nextUseSaga(action: UseAction) {
 function* i18nextInitSaga(action: InitAction) {
   try {
     yield cps([I18Next, 'init'], action.payload);
-    yield put(i18nextReady());
+    yield put(i18nextReady(I18Next));
   } catch (error) {
     console.error(error);
     yield put(i18nextError(error));
@@ -70,7 +70,8 @@ function* i18nextLoadLanguagesSaga(action: LoadLanguagesAction) {
 
 function* i18nextCreateInstance(action: InitAction) {
   try {
-    const newInstance = yield cps([I18Next, 'createInstance'], action.payload);
+    const newInstance = I18Next.createInstance();
+    yield cps([newInstance, 'init'], action.payload);
     yield put(i18nextCreateInstanceReady(newInstance));
   } catch (error) {
     console.error(error);

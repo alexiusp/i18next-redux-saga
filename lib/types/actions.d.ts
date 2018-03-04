@@ -1,3 +1,5 @@
+/// <reference types="i18next" />
+import * as I18Next from 'i18next';
 import { Action, ActionCreator } from 'redux';
 export declare const I18NEXT_USE = "@@i18n/I18NEXT_USE";
 export declare const I18NEXT_INIT = "@@i18n/I18NEXT_INIT";
@@ -21,6 +23,8 @@ export interface UseAction extends BaseAction<any> {
 }
 export interface InitAction extends BaseAction<any> {
 }
+export interface ReadyAction extends BaseAction<I18Next> {
+}
 export interface ErrorAction extends BaseAction<any> {
 }
 export interface ChangeLanguageAction extends BaseAction<string> {
@@ -31,7 +35,7 @@ export interface LoadLanguagesAction extends BaseAction<string | string[]> {
 }
 export declare const i18nextUse: ActionCreator<UseAction>;
 export declare const i18nextInit: ActionCreator<InitAction>;
-export declare const i18nextReady: ActionCreator<SimpleAction>;
+export declare const i18nextReady: ActionCreator<ReadyAction>;
 export declare const i18nextError: ActionCreator<ErrorAction>;
 export declare const i18nextChangeLanguage: ActionCreator<ChangeLanguageAction>;
 export declare const i18nextChangeLanguageReady: ActionCreator<SimpleAction>;
@@ -40,4 +44,4 @@ export declare const i18nextLoadNamespacesReady: ActionCreator<SimpleAction>;
 export declare const i18nextLoadLanguages: ActionCreator<LoadLanguagesAction>;
 export declare const i18nextLoadLanguagesReady: ActionCreator<SimpleAction>;
 export declare const i18nextCreateInstance: ActionCreator<InitAction>;
-export declare const i18nextCreateInstanceReady: ActionCreator<InitAction>;
+export declare const i18nextCreateInstanceReady: ActionCreator<ReadyAction>;

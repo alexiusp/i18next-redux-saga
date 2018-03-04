@@ -1,3 +1,4 @@
+import * as I18Next from 'i18next';
 import { Action, ActionCreator } from 'redux';
 
 // actions
@@ -29,6 +30,9 @@ export interface UseAction extends BaseAction<any> {
 export interface InitAction extends BaseAction<any> {
 }
 
+export interface ReadyAction extends BaseAction<I18Next> {
+}
+
 export interface ErrorAction extends BaseAction<any> {
 }
 
@@ -56,9 +60,10 @@ export const i18nextInit: ActionCreator<InitAction> = (config: any) => {
   };
 };
 
-export const i18nextReady: ActionCreator<SimpleAction> = () => {
+export const i18nextReady: ActionCreator<ReadyAction> = (instance: I18Next) => {
   return {
     type: I18NEXT_READY,
+    payload: instance,
   };
 };
 
@@ -115,7 +120,7 @@ export const i18nextCreateInstance: ActionCreator<InitAction> = (options: any) =
   };
 };
 
-export const i18nextCreateInstanceReady: ActionCreator<InitAction> = (instance: any) => {
+export const i18nextCreateInstanceReady: ActionCreator<ReadyAction> = (instance: I18Next) => {
   return {
     type: I18NEXT_CREATE_INSTANCE_READY,
     payload: instance,
