@@ -23,7 +23,7 @@ export interface UseAction extends BaseAction<any> {
 }
 export interface InitAction extends BaseAction<any> {
 }
-export interface ReadyAction extends BaseAction<I18Next> {
+export interface ReadyAction extends BaseAction<I18Next.i18n> {
 }
 export interface ErrorAction extends BaseAction<any> {
 }
