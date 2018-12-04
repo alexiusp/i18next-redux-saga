@@ -1,4 +1,3 @@
-/// <reference types="i18next" />
 import * as I18Next from 'i18next';
 import { Action, ActionCreator } from 'redux';
 export declare const I18NEXT_USE = "@@i18n/I18NEXT_USE";
