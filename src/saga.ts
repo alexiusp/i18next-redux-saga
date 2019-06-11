@@ -1,4 +1,4 @@
-import * as I18Next from 'i18next';
+import I18Next from 'i18next';
 import { all, call, cps, put, takeEvery } from 'redux-saga/effects';
 import {
   I18NEXT_CHANGE_LANGUAGE,

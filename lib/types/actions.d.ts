@@ -1,4 +1,4 @@
-import * as I18Next from 'i18next';
+import I18Next from 'i18next';
 import { Action, ActionCreator } from 'redux';
 export declare const I18NEXT_USE = "@@i18n/I18NEXT_USE";
 export declare const I18NEXT_INIT = "@@i18n/I18NEXT_INIT";

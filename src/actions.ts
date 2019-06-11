@@ -1,4 +1,4 @@
-import * as I18Next from 'i18next';
+import I18Next from 'i18next';
 import { Action, ActionCreator } from 'redux';
 
 // actions
