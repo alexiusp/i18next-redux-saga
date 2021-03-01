@@ -1,4 +1,5 @@
 import I18Next from 'i18next';
+import { SagaIterator } from 'redux-saga';
 import { all, call, cps, put, takeEvery } from 'redux-saga/effects';
 import {
   I18NEXT_CHANGE_LANGUAGE,
@@ -80,7 +81,7 @@ function* i18nextCreateInstance(action: ICreateInstanceAction) {
   }
 }
 
-export default function* i18nextSaga() {
+export default function* i18nextSaga(): SagaIterator {
   return yield all([
     yield takeEvery(I18NEXT_INIT, i18nextInitSaga),
     yield takeEvery(I18NEXT_USE, i18nextUseSaga),
