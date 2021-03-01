@@ -7,14 +7,15 @@ import {
   I18NEXT_LOAD_LANGUAGES,
   I18NEXT_LOAD_NAMESPACES,
   I18NEXT_USE,
-} from './actions';
+  ICreateInstanceAction,
+} from './actionTypes';
 import {
-  ChangeLanguageAction,
-  InitAction,
-  LoadLanguagesAction,
-  LoadNamespacesAction,
-  UseAction,
-} from './actions';
+  IChangeLanguageAction,
+  IInitAction,
+  ILoadLanguagesAction,
+  ILoadNamespacesAction,
+  IUseAction,
+} from './actionTypes';
 import {
   i18nextChangeLanguageReady,
   i18nextCreateInstanceReady,
@@ -24,13 +25,13 @@ import {
   i18nextReady,
 } from './actions';
 
-function* i18nextUseSaga(action: UseAction) {
-  yield call([I18Next, 'use'], action.payload);
+function* i18nextUseSaga(action: IUseAction) {
+  yield call([I18Next, 'use'], action.module);
 }
 
-function* i18nextInitSaga(action: InitAction) {
+function* i18nextInitSaga(action: IInitAction) {
   try {
-    yield cps([I18Next, 'init'], action.payload);
+    yield cps([I18Next, 'init'], action.options);
     yield put(i18nextReady(I18Next));
   } catch (error) {
     console.error(error);
@@ -38,9 +39,9 @@ function* i18nextInitSaga(action: InitAction) {
   }
 }
 
-function* i18nextChangeLanguageSaga(action: ChangeLanguageAction) {
+function* i18nextChangeLanguageSaga(action: IChangeLanguageAction) {
   try {
-    yield cps([I18Next, 'changeLanguage'], action.payload);
+    yield cps([I18Next, 'changeLanguage'], action.language);
     yield put(i18nextChangeLanguageReady());
   } catch (error) {
     console.error(error);
@@ -48,9 +49,9 @@ function* i18nextChangeLanguageSaga(action: ChangeLanguageAction) {
   }
 }
 
-function* i18nextLoadNamespacesSaga(action: LoadNamespacesAction) {
+function* i18nextLoadNamespacesSaga(action: ILoadNamespacesAction) {
   try {
-    yield cps([I18Next, 'loadNamespaces'], action.payload);
+    yield cps([I18Next, 'loadNamespaces'], action.ns);
     yield put(i18nextLoadNamespacesReady());
   } catch (error) {
     console.error(error);
@@ -58,9 +59,9 @@ function* i18nextLoadNamespacesSaga(action: LoadNamespacesAction) {
   }
 }
 
-function* i18nextLoadLanguagesSaga(action: LoadLanguagesAction) {
+function* i18nextLoadLanguagesSaga(action: ILoadLanguagesAction) {
   try {
-    yield cps([I18Next, 'loadLanguages'], action.payload);
+    yield cps([I18Next, 'loadLanguages'], action.languages);
     yield put(i18nextLoadLanguagesReady());
   } catch (error) {
     console.error(error);
@@ -68,10 +69,10 @@ function* i18nextLoadLanguagesSaga(action: LoadLanguagesAction) {
   }
 }
 
-function* i18nextCreateInstance(action: InitAction) {
+function* i18nextCreateInstance(action: ICreateInstanceAction) {
   try {
     const newInstance = I18Next.createInstance();
-    yield cps([newInstance, 'init'], action.payload);
+    yield cps([newInstance, 'init'], action.options);
     yield put(i18nextCreateInstanceReady(newInstance));
   } catch (error) {
     console.error(error);

@@ -1,128 +1,62 @@
-import I18Next from 'i18next';
-import { Action, ActionCreator } from 'redux';
+import { i18n, InitOptions } from 'i18next';
+import * as ActionTypes from './actionTypes';
+import { I18nextModule } from './types';
 
-// actions
-export const I18NEXT_USE = '@@i18n/I18NEXT_USE';
-export const I18NEXT_INIT = '@@i18n/I18NEXT_INIT';
-export const I18NEXT_ERROR = '@@i18n/I18NEXT_ERROR';
-export const I18NEXT_READY = '@@i18n/I18NEXT_READY';
-export const I18NEXT_CHANGE_LANGUAGE = '@@i18n/I18NEXT_CHANGE_LANGUAGE';
-export const I18NEXT_CHANGE_LANGUAGE_READY = '@@i18n/I18NEXT_CHANGE_LANGUAGE_READY';
-export const I18NEXT_LOAD_NAMESPACES = '@@i18n/I18NEXT_LOAD_NAMESPACES';
-export const I18NEXT_LOAD_NAMESPACES_READY = '@@i18n/I18NEXT_LOAD_NAMESPACES_READY';
-export const I18NEXT_LOAD_LANGUAGES = '@@i18n/I18NEXT_LOAD_LANGUAGES';
-export const I18NEXT_LOAD_LANGUAGES_READY = '@@i18n/I18NEXT_LOAD_LANGUAGES_READY';
-export const I18NEXT_CREATE_INSTANCE = '@@i18n/I18NEXT_CREATE_INSTANCE';
-export const I18NEXT_CREATE_INSTANCE_READY = '@@i18n/I18NEXT_CREATE_INSTANCE_READY';
+export const i18nextUse: (module: I18nextModule) => ActionTypes.IUseAction = (module) => ({
+  type: ActionTypes.I18NEXT_USE,
+  module,
+});
 
-// interfaces
-export interface SimpleAction extends Action {
-  type: string;
-}
+export const i18nextInit: (options: InitOptions) => ActionTypes.IInitAction = (options) => ({
+  type: ActionTypes.I18NEXT_INIT,
+  options,
+});
 
-export interface BaseAction<T> extends SimpleAction {
-  payload: T;
-}
+export const i18nextError: (error: Error | null | undefined) => ActionTypes.IErrorAction = (error) => ({
+  type: ActionTypes.I18NEXT_ERROR,
+  error,
+});
 
-export interface UseAction extends BaseAction<any> {
-}
+export const i18nextReady: (instance: i18n) => ActionTypes.IReadyAction = (instance) => ({
+  type: ActionTypes.I18NEXT_READY,
+  instance,
+});
 
-export interface InitAction extends BaseAction<any> {
-}
+export const i18nextChangeLanguage: (language: string) => ActionTypes.IChangeLanguageAction = (language) => ({
+  type: ActionTypes.I18NEXT_CHANGE_LANGUAGE,
+  language,
+});
 
-export interface ReadyAction extends BaseAction<I18Next.i18n> {
-}
+export const i18nextChangeLanguageReady: () => ActionTypes.IChangeLanguageReadyAction = () => ({
+  type: ActionTypes.I18NEXT_CHANGE_LANGUAGE_READY,
+});
 
-export interface ErrorAction extends BaseAction<any> {
-}
+export const i18nextLoadNamespaces: (ns: string | string[]) => ActionTypes.ILoadNamespacesAction = (ns) => ({
+  type: ActionTypes.I18NEXT_LOAD_NAMESPACES,
+  ns,
+});
 
-export interface ChangeLanguageAction extends BaseAction<string> {
-}
+export const i18nextLoadNamespacesReady: () => ActionTypes.ILoadNamespacesReadyAction = () => ({
+  type: ActionTypes.I18NEXT_LOAD_NAMESPACES_READY,
+});
 
-export interface LoadNamespacesAction extends BaseAction<string | string[]> {
-}
+export const i18nextLoadLanguages: (languages: string | string[]) => ActionTypes.ILoadLanguagesAction = (
+  languages
+) => ({
+  type: ActionTypes.I18NEXT_LOAD_LANGUAGES,
+  languages,
+});
 
-export interface LoadLanguagesAction extends BaseAction<string | string[]> {
-}
+export const i18nextLoadLanguagesReady: () => ActionTypes.ILoadLanguagesReadyAction = () => ({
+  type: ActionTypes.I18NEXT_LOAD_LANGUAGES_READY,
+});
 
-// action builders
-export const i18nextUse: ActionCreator<UseAction> = (plugin: any) => {
-  return {
-    type: I18NEXT_USE,
-    payload: plugin,
-  };
-};
+export const i18nextCreateInstance: (options: InitOptions) => ActionTypes.ICreateInstanceAction = (options) => ({
+  type: ActionTypes.I18NEXT_CREATE_INSTANCE,
+  options,
+});
 
-export const i18nextInit: ActionCreator<InitAction> = (config: any) => {
-  return {
-    type: I18NEXT_INIT,
-    payload: config,
-  };
-};
-
-export const i18nextReady: ActionCreator<ReadyAction> = (instance: I18Next.i18n) => {
-  return {
-    type: I18NEXT_READY,
-    payload: instance,
-  };
-};
-
-export const i18nextError: ActionCreator<ErrorAction> = (error: any) => {
-  return {
-    type: I18NEXT_ERROR,
-    payload: error,
-  };
-};
-
-export const i18nextChangeLanguage: ActionCreator<ChangeLanguageAction> = (language: string) => {
-  return {
-    type: I18NEXT_CHANGE_LANGUAGE,
-    payload: language,
-  };
-};
-
-export const i18nextChangeLanguageReady: ActionCreator<SimpleAction> = () => {
-  return {
-    type: I18NEXT_CHANGE_LANGUAGE_READY,
-  };
-};
-
-export const i18nextLoadNamespaces: ActionCreator<LoadNamespacesAction> = (ns: string | string[]) => {
-  return {
-    type: I18NEXT_LOAD_NAMESPACES,
-    payload: ns,
-  };
-};
-
-export const i18nextLoadNamespacesReady: ActionCreator<SimpleAction> = () => {
-  return {
-    type: I18NEXT_LOAD_NAMESPACES_READY,
-  };
-};
-
-export const i18nextLoadLanguages: ActionCreator<LoadLanguagesAction> = (lang: string | string[]) => {
-  return {
-    type: I18NEXT_LOAD_LANGUAGES,
-    payload: lang,
-  };
-};
-
-export const i18nextLoadLanguagesReady: ActionCreator<SimpleAction> = () => {
-  return {
-    type: I18NEXT_LOAD_LANGUAGES_READY,
-  };
-};
-
-export const i18nextCreateInstance: ActionCreator<InitAction> = (options: any) => {
-  return {
-    type: I18NEXT_CREATE_INSTANCE,
-    payload: options,
-  };
-};
-
-export const i18nextCreateInstanceReady: ActionCreator<ReadyAction> = (instance: I18Next.i18n) => {
-  return {
-    type: I18NEXT_CREATE_INSTANCE_READY,
-    payload: instance,
-  };
-};
+export const i18nextCreateInstanceReady: (instance: i18n) => ActionTypes.ICreateInstanceReadyAction = (instance) => ({
+  type: ActionTypes.I18NEXT_CREATE_INSTANCE_READY,
+  instance,
+});
