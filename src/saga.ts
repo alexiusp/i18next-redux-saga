@@ -1,6 +1,6 @@
 import I18Next from 'i18next';
 import { SagaIterator } from 'redux-saga';
-import { all, call, cps, put, takeEvery } from 'redux-saga/effects';
+import { all, call, put, takeEvery } from 'redux-saga/effects';
 import {
   I18NEXT_CHANGE_LANGUAGE,
   I18NEXT_CREATE_INSTANCE,
@@ -26,13 +26,13 @@ import {
   i18nextReady,
 } from './actions';
 
-function* i18nextUseSaga(action: IUseAction) {
+function* i18nextUseSaga(action: IUseAction): SagaIterator {
   yield call([I18Next, 'use'], action.module);
 }
 
-function* i18nextInitSaga(action: IInitAction) {
+function* i18nextInitSaga(action: IInitAction): SagaIterator {
   try {
-    yield cps([I18Next, 'init'], action.options);
+    yield call([I18Next, 'init'], action.options);
     yield put(i18nextReady(I18Next));
   } catch (error) {
     console.error(error);
@@ -40,9 +40,9 @@ function* i18nextInitSaga(action: IInitAction) {
   }
 }
 
-function* i18nextChangeLanguageSaga(action: IChangeLanguageAction) {
+function* i18nextChangeLanguageSaga(action: IChangeLanguageAction): SagaIterator {
   try {
-    yield cps([I18Next, 'changeLanguage'], action.language);
+    yield call([I18Next, 'changeLanguage'], action.language);
     yield put(i18nextChangeLanguageReady());
   } catch (error) {
     console.error(error);
@@ -50,9 +50,9 @@ function* i18nextChangeLanguageSaga(action: IChangeLanguageAction) {
   }
 }
 
-function* i18nextLoadNamespacesSaga(action: ILoadNamespacesAction) {
+function* i18nextLoadNamespacesSaga(action: ILoadNamespacesAction): SagaIterator {
   try {
-    yield cps([I18Next, 'loadNamespaces'], action.ns);
+    yield call([I18Next, 'loadNamespaces'], action.ns);
     yield put(i18nextLoadNamespacesReady());
   } catch (error) {
     console.error(error);
@@ -60,9 +60,9 @@ function* i18nextLoadNamespacesSaga(action: ILoadNamespacesAction) {
   }
 }
 
-function* i18nextLoadLanguagesSaga(action: ILoadLanguagesAction) {
+function* i18nextLoadLanguagesSaga(action: ILoadLanguagesAction): SagaIterator {
   try {
-    yield cps([I18Next, 'loadLanguages'], action.languages);
+    yield call([I18Next, 'loadLanguages'], action.languages);
     yield put(i18nextLoadLanguagesReady());
   } catch (error) {
     console.error(error);
@@ -70,10 +70,10 @@ function* i18nextLoadLanguagesSaga(action: ILoadLanguagesAction) {
   }
 }
 
-function* i18nextCreateInstance(action: ICreateInstanceAction) {
+function* i18nextCreateInstance(action: ICreateInstanceAction): SagaIterator {
   try {
     const newInstance = I18Next.createInstance();
-    yield cps([newInstance, 'init'], action.options);
+    yield call([newInstance, 'init'], action.options);
     yield put(i18nextCreateInstanceReady(newInstance));
   } catch (error) {
     console.error(error);
