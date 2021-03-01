@@ -1,6 +1,6 @@
 {
   "name": "i18next-redux-saga",
-  "version": "2.0.0",
+  "version": "2.0.0-alpha",
   "description": "i18next binding to redux using saga",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
