@@ -8,20 +8,16 @@ import { I18nextModule } from '../types';
 jest.mock('i18next');
 
 describe('saga for wrapping i18next calls', () => {
-
   // TODO: write unit-tests for error cases
 
   beforeEach(() => {
     jest.resetAllMocks();
-  })
+  });
 
   it('should call use for given module', async () => {
     const mockModule = {} as I18nextModule;
     const action = Actions.i18nextUse(mockModule);
-    await expectSaga(i18nextSaga)
-      .dispatch(action)
-      .call([I18Next, 'use'], mockModule)
-      .silentRun();
+    await expectSaga(i18nextSaga).dispatch(action).call([I18Next, 'use'], mockModule).silentRun();
     expect(I18Next.use).toHaveBeenCalledWith(mockModule);
   });
 
@@ -72,5 +68,4 @@ describe('saga for wrapping i18next calls', () => {
     expect(I18Next.createInstance).toHaveBeenCalled();
     expect(mockInstance.init).toHaveBeenCalledWith(mockOptions);
   });
-
 });
